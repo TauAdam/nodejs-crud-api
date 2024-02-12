@@ -14,6 +14,12 @@ export const router = (req: IncomingMessage, res: ServerResponse<IncomingMessage
 			case HTTP_METHODS.POST:
 				userService.create(req, res)
 				break
+			case HTTP_METHODS.PUT:
+				userService.update(req, res)
+				break
+			case HTTP_METHODS.DELETE:
+				userService.delete(req, res)
+				break
 			default:
 				throw new Error(ERROR_MESSAGE.NOT_METHOD)
 		}
