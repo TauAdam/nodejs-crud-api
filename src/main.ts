@@ -2,23 +2,23 @@ import { IncomingMessage, ServerResponse, createServer } from 'http'
 import * as dotenv from 'dotenv'
 import { router } from './router'
 import { sendFailure } from './utils/response'
-import { STATUS_CODE } from './models'
+import { ERROR_MESSAGE } from './models'
 dotenv.config()
 
-const port = Number(process.env.PORT) || 4000
+const port = Number(process.env.PORT) || 5000
 
-const server = createServer(async (request: IncomingMessage, response: ServerResponse) => {
+const server = createServer((request: IncomingMessage, response: ServerResponse) => {
 	try {
 		response.setHeader('Content-Type', 'application/json')
 		const { url } = request
 		if (url?.startsWith('/api/users')) {
 			router(request, response)
 		} else {
-			throw new Error('Resource not found')
+			throw new Error(ERROR_MESSAGE.NOT_FOUND)
 		}
 	} catch (error) {
 		if (error instanceof Error) {
-			sendFailure(response, error.message, STATUS_CODE.NOT_FOUND)
+			sendFailure(response, error.message)
 		}
 	}
 })

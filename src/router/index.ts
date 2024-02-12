@@ -1,21 +1,25 @@
 import { IncomingMessage, ServerResponse } from 'http'
-import { HTTP_METHODS, STATUS_CODE } from '../models'
+import { HTTP_METHODS, ERROR_MESSAGE } from '../models'
 import { UserService } from '../services/user.service'
 import { sendFailure } from '../utils/response'
 
+const userService = new UserService()
+
 export const router = (req: IncomingMessage, res: ServerResponse<IncomingMessage>) => {
-	const userService = new UserService()
 	try {
 		switch (req.method) {
 			case HTTP_METHODS.GET:
-				userService.get(req, res)
+				userService.read(req, res)
+				break
+			case HTTP_METHODS.POST:
+				userService.create(req, res)
 				break
 			default:
-				throw new Error('Invalid Http method')
+				throw new Error(ERROR_MESSAGE.NOT_METHOD)
 		}
 	} catch (error) {
 		if (error instanceof Error) {
-			sendFailure(res, error.message, STATUS_CODE.NOT_FOUND)
+			sendFailure(res, error.message)
 		}
 	}
 }

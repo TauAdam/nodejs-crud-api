@@ -5,9 +5,9 @@ const sendSuccess = <T>(response: ServerResponse<IncomingMessage>, body: T, stat
 	response.statusCode = statusCode
 	response.end(JSON.stringify(body))
 }
-const sendFailure = (response: ServerResponse<IncomingMessage>, message: string, statusCode = STATUS_CODE.OK) => {
+const sendFailure = (response: ServerResponse<IncomingMessage>, message: string, statusCode = STATUS_CODE.NOT_FOUND) => {
 	response.statusCode = statusCode
 	response.statusMessage = message
-	response.end(JSON.stringify({ message: message }))
+	response.end(JSON.stringify({ message }))
 }
 export { sendSuccess, sendFailure }
