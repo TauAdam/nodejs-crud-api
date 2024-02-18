@@ -3,9 +3,7 @@ import { HTTP_METHODS, ERROR_MESSAGE } from '../models'
 import { UserService } from '../services/user.service'
 import { sendFailure } from '../utils/response'
 
-const userService = new UserService()
-
-export const router = (req: IncomingMessage, res: ServerResponse<IncomingMessage>) => {
+export const router = (req: IncomingMessage, res: ServerResponse<IncomingMessage>, userService: UserService) => {
 	try {
 		switch (req.method) {
 			case HTTP_METHODS.GET:

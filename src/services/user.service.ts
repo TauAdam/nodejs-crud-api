@@ -4,7 +4,7 @@ import { sendFailure, sendSuccess } from '../utils/response'
 import { v4 as uuid, validate } from 'uuid'
 
 export class UserService {
-	private database: UserSchema[] = []
+	public database: UserSchema[] = []
 	private getIdFromUrl(url: string | undefined) {
 		if (!url || url === '/api/users') {
 			return null
@@ -117,5 +117,8 @@ export class UserService {
 		}
 		this.database.splice(recordIndex, 1)
 		sendSuccess(res, null, STATUS_CODE.NO_CONTENT)
+	}
+	resetDatabase() {
+		this.database = []
 	}
 }
