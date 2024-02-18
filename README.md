@@ -26,6 +26,10 @@ Production Mode
 npm run start:prod
 ```
 
+Testing:
+```bash
+npm test
+```
 ## Usage
 
 Once you have the application running, you can interact with it through the following API endpoints:
