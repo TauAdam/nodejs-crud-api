@@ -5,7 +5,7 @@ import { sendFailure } from './utils/response'
 import { ERROR_MESSAGE } from './models'
 dotenv.config()
 
-const port = Number(process.env.PORT) || 5000
+const port = parseInt(process.env.PORT || '3000', 10)
 
 const server = createServer((request: IncomingMessage, response: ServerResponse) => {
 	try {
@@ -24,5 +24,5 @@ const server = createServer((request: IncomingMessage, response: ServerResponse)
 })
 
 server.listen(port, () => {
-	console.log(`Server is listening on port: ${port}, and process id: ${process.pid}`)
+	console.log(`Server is running on http://localhost:${port}`)
 })
